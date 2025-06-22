@@ -34,6 +34,11 @@ class _HomePageState extends State<HomePage> {
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Colors.deepPurple,
+        child: const Icon(Icons.add, color: Colors.white, size: 30),
+      ),
       body: ListView.builder(
         itemCount: toDo.length,
         itemBuilder: (context, index) {
