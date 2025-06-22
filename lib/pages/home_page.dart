@@ -35,6 +35,12 @@ class _HomePageState extends State<HomePage> {
     Navigator.of(context).pop();
   }
 
+  //Cancel task function
+  void cancelTask() {
+    _controller.clear();
+    Navigator.of(context).pop();
+  }
+
   // Create new task function
   void createNewTask() {
     showDialog(
@@ -43,7 +49,7 @@ class _HomePageState extends State<HomePage> {
         return DialogBox(
           controller: _controller,
           onSave: saveNewTask,
-          onCancel: () => Navigator.of(context).pop(),
+          onCancel: cancelTask,
         );
       },
     );
@@ -67,6 +73,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.deepPurple,
         child: const Icon(Icons.add, color: Colors.white, size: 30),
       ),
+
       body: ListView.builder(
         itemCount: toDo.length,
         itemBuilder: (context, index) {
@@ -74,6 +81,11 @@ class _HomePageState extends State<HomePage> {
             taskName: toDo[index][0],
             taskCompleted: toDo[index][1],
             onChanged: (value) => checkBoxChanged(value, index),
+            onDelete: () {
+              setState(() {
+                toDo.removeAt(index);
+              });
+            },
           );
         },
       ),
