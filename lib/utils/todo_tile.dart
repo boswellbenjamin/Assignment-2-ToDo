@@ -4,12 +4,14 @@ class TodoList extends StatelessWidget {
   final String taskName;
   final bool taskCompleted;
   final Function(bool?)? onChanged;
+  final Function()? onDelete;
 
   const TodoList({
     super.key,
     required this.taskName,
     required this.taskCompleted,
     required this.onChanged,
+    required this.onDelete,
   });
 
   @override
@@ -24,16 +26,30 @@ class TodoList extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Checkbox(value: taskCompleted, onChanged: onChanged),
+            // Checkbox
+            Checkbox(
+              value: taskCompleted,
+              onChanged: onChanged,
+              activeColor: Colors.deepPurple,
+            ),
 
-            Text(
-              taskName,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                decoration: taskCompleted ? TextDecoration.lineThrough : null,
-                fontWeight: FontWeight.bold,
+            // Task name
+            Expanded(
+              child: Text(
+                taskName,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  decoration: taskCompleted ? TextDecoration.lineThrough : null,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
+            ),
+
+            // Delete button
+            IconButton(
+              onPressed: onDelete,
+              icon: Icon(Icons.delete, color: Colors.red),
             ),
           ],
         ),
