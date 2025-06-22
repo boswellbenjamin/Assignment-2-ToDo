@@ -19,11 +19,20 @@ class _HomePageState extends State<HomePage> {
     ['Learn Flutter', false],
   ];
 
-  // Checkbox changed function
+  // Checkbox was tapped
   void checkBoxChanged(bool? value, int index) {
     setState(() {
       toDo[index][1] = !toDo[index][1];
     });
+  }
+
+  // Save new task function
+  void saveNewTask() {
+    setState(() {
+      toDo.add([_controller.text, false]);
+      _controller.clear();
+    });
+    Navigator.of(context).pop();
   }
 
   // Create new task function
@@ -31,7 +40,11 @@ class _HomePageState extends State<HomePage> {
     showDialog(
       context: context,
       builder: (context) {
-        return DialogBox(controller: _controller);
+        return DialogBox(
+          controller: _controller,
+          onSave: saveNewTask,
+          onCancel: () => Navigator.of(context).pop(),
+        );
       },
     );
   }
