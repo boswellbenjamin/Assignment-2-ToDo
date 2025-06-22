@@ -1,3 +1,4 @@
+import 'package:assignment2/utils/dialog_box.dart';
 import 'package:assignment2/utils/todo_tile.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // Text editing controller for the dialog box
+  final TextEditingController _controller = TextEditingController();
+
+  // List of todo tasks
   List toDo = [
     ['Make a todo app', false],
     ['Learn Flutter', false],
@@ -26,7 +31,7 @@ class _HomePageState extends State<HomePage> {
     showDialog(
       context: context,
       builder: (context) {
-        return AlertDialog();
+        return DialogBox(controller: _controller);
       },
     );
   }
