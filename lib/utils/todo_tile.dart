@@ -31,6 +31,7 @@ class TodoList extends StatelessWidget {
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18,
+                decoration: taskCompleted ? TextDecoration.lineThrough : null,
                 fontWeight: FontWeight.bold,
               ),
             ),
