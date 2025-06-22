@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class TodoList extends StatelessWidget {
   final String taskName;
   final bool taskCompleted;
-  Function(bool?)? onChanged;
+  final Function(bool?)? onChanged;
 
-  TodoList({
+  const TodoList({
     super.key,
     required this.taskName,
     required this.taskCompleted,
