@@ -5,6 +5,7 @@ class TodoList extends StatelessWidget {
   final bool taskCompleted;
   final Function(bool?)? onChanged;
   final Function()? onDelete;
+  final Function()? onEdit;
 
   const TodoList({
     super.key,
@@ -12,6 +13,7 @@ class TodoList extends StatelessWidget {
     required this.taskCompleted,
     required this.onChanged,
     required this.onDelete,
+    this.onEdit,
   });
 
   @override
@@ -50,6 +52,11 @@ class TodoList extends StatelessWidget {
             IconButton(
               onPressed: onDelete,
               icon: Icon(Icons.delete, color: Colors.red),
+            ),
+
+            IconButton(
+              onPressed: onEdit,
+              icon: Icon(Icons.edit, color: Colors.blue),
             ),
           ],
         ),
