@@ -55,6 +55,30 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  // Edit existing task function
+  void editTask(int index) {
+    _controller.text = toDo[index][0];
+    showDialog(
+      context: context,
+      builder: (context) {
+        return DialogBox(
+          controller: _controller,
+          onSave: () => saveEditedTask(index),
+          onCancel: cancelTask,
+        );
+      },
+    );
+  }
+
+  // Save edited task function
+  void saveEditedTask(int index) {
+    setState(() {
+      toDo[index][0] = _controller.text;
+      _controller.clear();
+    });
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,10 +92,14 @@ class _HomePageState extends State<HomePage> {
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: createNewTask,
         backgroundColor: Colors.deepPurple,
-        child: const Icon(Icons.add, color: Colors.white, size: 30),
+        icon: const Icon(Icons.add, color: Colors.white, size: 24),
+        label: const Text(
+          'Add New Task',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
       ),
 
       body: ListView.builder(
@@ -86,6 +114,7 @@ class _HomePageState extends State<HomePage> {
                 toDo.removeAt(index);
               });
             },
+            onEdit: () => editTask(index),
           );
         },
       ),
